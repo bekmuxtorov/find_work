@@ -24,6 +24,7 @@ class District(models.Model):
     region = models.ForeignKey(
         to=Region,
         on_delete=models.SET_NULL,
+        related_name="districts",
         blank=True,
         null=True
     )
@@ -33,7 +34,7 @@ class District(models.Model):
     )
 
     def __str__(self):
-        return " | ".join([self.region, self.name])
+        return " | ".join([self.region.name, self.name])
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -62,6 +63,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     region = models.ForeignKey(
         to=Region,
         verbose_name=_("Viloyat"),
+        related_name="users",
         on_delete=models.SET_NULL,
         null=True,
         blank=True
@@ -69,6 +71,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     district = models.ForeignKey(
         to=District,
         verbose_name=_("Viloyat"),
+        related_name="users",
         on_delete=models.SET_NULL,
         null=True,
         blank=True
@@ -84,7 +87,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=False
     )
     is_staff = models.BooleanField(
-        verbose_name=_("Bu ishchi"),
+        verbose_name=_("Bu sayt ishchisi"),
         default=False
     )
     created_at = models.DateTimeField(
