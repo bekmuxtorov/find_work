@@ -34,7 +34,7 @@ class District(models.Model):
     )
 
     def __str__(self):
-        return " | ".join([self.region.name, self.name])
+        return " | ".join([self.name, self.region.name])
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -76,7 +76,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         null=True,
         blank=True
     )
-    # subcategory(MM Subcategory)
+    subcategory = models.ManyToManyField(
+        to="work.SubCategory",
+        related_name="users"
+    )
     sms_code = models.CharField(
         verbose_name=_("sms code"),
         max_length=6,
