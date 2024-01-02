@@ -78,6 +78,7 @@ class UserAdmin(BaseUserAdmin):
                     "full_name",
                     "region",
                     "district",
+                    "image"
                 )
             },
         ),

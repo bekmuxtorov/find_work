@@ -94,6 +94,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name=_("Yaratilgan vaqt"),
         auto_now_add=True
     )
+    image = models.ImageField(
+        verbose_name=_("Rasm"),
+        upload_to='users/',
+        default="users/default.jpg"
+    )
 
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = ['full_name']
