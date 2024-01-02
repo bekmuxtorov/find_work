@@ -2,20 +2,25 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-02 14:18+0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2024-01-02 14:41+0500\n"
+"PO-Revision-Date: 2024-01-02 14:42+0500\n"
+"Last-Translator: Anonymous User <anonymous@user.tld>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Translated-Using: django-rosetta 0.10.0\n"
+
+#: .\account\apps.py:8
+msgid "Account"
+msgstr "Shaxsiy hisob"
 
 #: .\account\managers.py:9 .\account\managers.py:18
 msgid "Invalid phone number. Please enter in the format +998909234567"
@@ -85,14 +90,14 @@ msgstr ""
 msgid "Yaratilgan vaqt"
 msgstr ""
 
-#: .\core\settings.py:135
+#: .\core\settings.py:136
 msgid "Uzbek(Latn)"
 msgstr ""
 
-#: .\core\settings.py:136
+#: .\core\settings.py:137
 msgid "Uzbek(Cyrl)"
 msgstr ""
 
-#: .\core\settings.py:137
+#: .\core\settings.py:138
 msgid "Russian"
 msgstr ""

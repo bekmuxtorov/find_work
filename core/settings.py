@@ -133,8 +133,8 @@ USE_L10N = True
 USE_TZ = True
 
 LANGUAGES = (
-    ("uz-Latn", _("Uzbek(Latn)")),
-    ("uz-Cyrl", _("Uzbek(Cyrl)")),
+    ("uz-LAtn", _("Uzbek(Latn)")),
+    ("uz-CYrl", _("Uzbek(Cyrl)")),
     ('ru', _("Russian")),
 )
 
