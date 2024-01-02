@@ -68,7 +68,7 @@ class Work(models.Model):
     )
     district = models.ForeignKey(
         to=District,
-        verbose_name=_("Viloyat"),
+        verbose_name=_("Tuman"),
         related_name="works",
         on_delete=models.SET_NULL,
         null=True,
