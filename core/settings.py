@@ -37,6 +37,7 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 LOCAL_APPS = [
     "account",
+    "work",
 ]
 
 # Application definition
