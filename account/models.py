@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils.translation import gettext_lazy as _
+from rest_framework.authtoken.models import Token
 
 from .managers import UserManager
 
@@ -11,6 +12,13 @@ USER_ROLE = (
     ("adminstrator", _("Adminstrator")),
     ("employer", _("Ish beruvchi"))
 )
+
+
+class TokenProxy(Token):
+    class Meta:
+        proxy = True
+        verbose_name = "Token"
+        verbose_name_plural = "Tokens"
 
 
 class Region(models.Model):
@@ -78,7 +86,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     subcategory = models.ManyToManyField(
         to="work.SubCategory",
-        related_name="users"
+        related_name="users",
+        blank=True,
+        null=True
     )
     sms_code = models.CharField(
         verbose_name=_("sms code"),
