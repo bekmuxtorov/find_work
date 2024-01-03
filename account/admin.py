@@ -1,12 +1,18 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from rest_framework.authtoken.models import TokenProxy as Token
+from rest_framework.authtoken.admin import TokenAdmin
 
 from . import models
 from . import forms
 
 admin.site.site_header = _("Online Ishchi")
 admin.site.index_title = 'Online Ishchi Administration'
+
+admin.site.unregister(Token)
+
+admin.site.register(models.TokenProxy, TokenAdmin)
 
 
 @admin.register(models.Region)
