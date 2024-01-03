@@ -88,7 +88,7 @@ class UserAdmin(BaseUserAdmin):
                         "groups", "user_permissions")},
         ),
         ("Important dates", {
-         "fields": ("last_login", 'sms_code', 'is_phone_verified')}),
+         "fields": ("subcategory", "last_login", 'sms_code', 'is_phone_verified')}),
     )
     add_fieldsets = (
         (
