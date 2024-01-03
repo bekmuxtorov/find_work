@@ -8,8 +8,8 @@ from .managers import UserManager
 
 USER_ROLE = (
     ("worker", _("Ishchi")),
-    (("adminstrator"), _("Adminstrator")),
-    (("employer"), _("Ish beruvchi"))
+    ("adminstrator", _("Adminstrator")),
+    ("employer", _("Ish beruvchi"))
 )
 
 
