@@ -88,7 +88,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         to="work.SubCategory",
         related_name="users",
         blank=True,
-        null=True
     )
     sms_code = models.CharField(
         verbose_name=_("sms code"),
