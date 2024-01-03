@@ -31,7 +31,7 @@ class SubCategoryAdmin(admin.ModelAdmin):
 
     def employers_count(self, obj):
         return obj.users.filter(role="employer").count()
-    workers_count.short_description = _("Ish beruvchilar soni")
+    employers_count.short_description = _("Ish beruvchilar soni")
 
 
 @admin.register(models.Work)
