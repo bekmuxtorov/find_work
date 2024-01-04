@@ -46,6 +46,7 @@ class Work(models.Model):
     # )
     employer = models.ForeignKey(
         verbose_name=_("Ish beruvchi"),
+        related_name="works",
         to=Employer,
         on_delete=models.SET_NULL,
         blank=True,
@@ -58,13 +59,10 @@ class Work(models.Model):
         blank=True,
         null=True
     )
-    subcategory = models.ForeignKey(
+    subcategory = models.ManyToManyField(
         to=SubCategory,
         verbose_name=_("SubCategory"),
         related_name="works",
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True
     )
     region = models.ForeignKey(
         to=Region,
