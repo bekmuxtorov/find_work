@@ -17,6 +17,7 @@ urlpatterns = i18n_patterns(
 
     path('', show_home),
     path('api/', include('account.urls')),
+    path('api/', include('work.urls')),
 )
 
 urlpatterns += swagger_urlpatterns
