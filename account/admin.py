@@ -116,3 +116,9 @@ class UserAdmin(BaseUserAdmin):
         if not change:
             obj.type = form.cleaned_data.get('type')
         super().save_model(request, obj, form, change)
+
+
+@admin.register(models.Employer)
+class EmployerAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'phone_number', 'created_at')
+    
