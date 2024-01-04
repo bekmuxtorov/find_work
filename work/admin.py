@@ -37,7 +37,7 @@ class SubCategoryAdmin(admin.ModelAdmin):
 @admin.register(models.Work)
 class Work(admin.ModelAdmin):
     list_display = ("id", "title", "status", "employer",
-                    "subcategory", "region", "district", "worker", "created_at")
+                    "region", "district", "worker", "created_at")
     list_filter = ("region", "district", "status", "subcategory")
     search_fields = ("title", "employer__full_name",)
     ordering = ("-created_at", "subcategory")
