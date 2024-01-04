@@ -144,3 +144,23 @@ class UserLoginAPIView(APIView):
             }
             return Response(user_data, status=status.HTTP_200_OK)
         return Response({"errors": "Password or phone_number error"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ChangePasswordAPIView(APIView):
+    permission_classes = [AllowAny,]
+    serializer_class = serializers.ChangePasswordSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            token = Token.objects.get_or_create(user=user)[0].key
+            response_data = {
+                'token': token,
+                "role": user.role,
+                'phone_number': user.phone_number,
+                "full_name": user.full_name
+            }
+
+            return Response(response_data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
