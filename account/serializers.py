@@ -3,12 +3,14 @@ from rest_framework import serializers
 from . import models
 
 
+# Region
 class RegionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Region
         fields = '__all__'
 
 
+# District
 class DistrictSerializer(serializers.ModelSerializer):
     region = RegionSerializer()
 
@@ -17,7 +19,14 @@ class DistrictSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# Password alashmashtirish
+# Employer
+class EmployerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Employer
+        fields = '__all__'
+
+
+# Change password
 class ChangePasswordSerializer(serializers.Serializer):
     phone_number = serializers.CharField(required=True, max_length=20)
     old_password = serializers.CharField(required=True)
@@ -47,6 +56,7 @@ class ChangePasswordSerializer(serializers.Serializer):
         return user
 
 
+# Register
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(required=True, write_only=True)
     password2 = serializers.CharField(required=True, write_only=True)
