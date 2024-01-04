@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import generics, status
 
 from drf_yasg import openapi
@@ -14,24 +14,28 @@ from . import models
 
 # Region List API View
 class RegionListAPIView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = models.Region.objects.all()
     serializer_class = serializers.RegionSerializer
 
 
 # Region Detail API View
 class RegionDetailAPIView(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = models.Region.objects.all()
     serializer_class = serializers.RegionSerializer
 
 
 # District List API View
 class DistrictListAPIView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = models.District.objects.all()
     serializer_class = serializers.DistrictSerializer
 
 
 # District Detail API View
 class DistrictDetailAPIView(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = models.District.objects.all()
     serializer_class = serializers.DistrictSerializer
 
@@ -147,9 +151,43 @@ class UserLoginAPIView(APIView):
 
 
 class ChangePasswordAPIView(APIView):
-    permission_classes = [AllowAny,]
+    permission_classes = [IsAuthenticated,]
     serializer_class = serializers.ChangePasswordSerializer
 
+    @swagger_auto_schema(
+        operation_description="Change password",
+        request_body=openapi.Schema(
+            required=['phone_number', 'old_password', 'new_password'],
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'phone_number': openapi.Schema(type=openapi.TYPE_STRING, description='Phone number'),
+                'old_password': openapi.Schema(type=openapi.TYPE_STRING, description='Old password'),
+                'new_password': openapi.Schema(type=openapi.TYPE_STRING, description='New password'),
+            }
+        ),
+        responses={
+            200: openapi.Response(
+                description="User login",
+                examples={
+                    'application/json': {
+                        "id": 1,
+                        "role": "adminstrator",
+                        "phone_number": "+998901040100",
+                        "token": "Token asdffdassfsasdfasdf=",
+                        "full_name": "Asadbek Muxtorov"
+                    }
+                }
+            ),
+            400: openapi.Response(
+                description="Bad request",
+                examples={
+                    'application/json': {
+                        'error': 'The old password entered with the current password did not match'
+                    }
+                }
+            )
+        }
+    )
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
@@ -157,6 +195,7 @@ class ChangePasswordAPIView(APIView):
             token = Token.objects.get_or_create(user=user)[0].key
             response_data = {
                 'token': token,
+                "id": user.id,
                 "role": user.role,
                 'phone_number': user.phone_number,
                 "full_name": user.full_name
