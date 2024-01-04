@@ -41,8 +41,6 @@ class DistrictDetailAPIView(generics.RetrieveAPIView):
 
 
 # User registration API View
-
-
 class UserRegistrationAPIView(APIView):
     permission_classes = [AllowAny,]
     serializer_class = serializers.RegisterSerializer
@@ -97,6 +95,7 @@ class UserRegistrationAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# User Login API View
 class UserLoginAPIView(APIView):
     permission_classes = [AllowAny]
 
@@ -150,6 +149,7 @@ class UserLoginAPIView(APIView):
         return Response({"errors": "Password or phone_number error"}, status=status.HTTP_400_BAD_REQUEST)
 
 
+# Change Password API View
 class ChangePasswordAPIView(APIView):
     permission_classes = [IsAuthenticated,]
     serializer_class = serializers.ChangePasswordSerializer
@@ -203,3 +203,15 @@ class ChangePasswordAPIView(APIView):
 
             return Response(response_data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# Employer List API View
+class EmployerListAPIView(generics.ListAPIView):
+    queryset = models.Employer.objects.all()
+    serializer_class = serializers.EmployerSerializer
+
+
+# Employer Detail API View
+class EmployerDetailAPIView(generics.RetrieveAPIView):
+    queryset = models.Employer.objects.all()
+    serializer_class = serializers.EmployerSerializer

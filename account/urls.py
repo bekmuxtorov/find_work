@@ -18,5 +18,9 @@ urlpatterns = [
     path('auth/login/', views.UserLoginAPIView.as_view()),
 
     # Change password
-    path('auth/change/password/', views.ChangePasswordAPIView.as_view())
+    path('auth/change/password/', views.ChangePasswordAPIView.as_view()),
+
+    # Employer
+    path('employers/', views.EmployerListAPIView.as_view()),
+    path('employers/<int:pk>/', views.EmployerDetailAPIView.as_view()),
 ]

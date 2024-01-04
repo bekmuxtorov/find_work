@@ -119,3 +119,30 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.phone_number
+
+
+class Employer(models.Model):
+    full_name = models.CharField(
+        verbose_name=_("FISH"),
+        max_length=200
+    )
+    phone_number = models.CharField(
+        verbose_name=_("Telefon raqam"),
+        max_length=20,
+        unique=True,
+        blank=True,
+        validators=[
+            RegexValidator(
+                regex=r'^\+998\d{9}$',
+                message=_(
+                    "Invalid phone number. Please enter in the format +998901234567")
+            ),
+        ]
+    )
+    created_at = models.DateTimeField(
+        verbose_name=_("Yaratilgan vaqt"),
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return " | ".join([self.full_name, self.phone_number])
