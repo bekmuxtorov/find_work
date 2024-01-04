@@ -1,5 +1,5 @@
 from django.db import models
-from account.models import User, District, Region
+from account.models import User, District, Region, Employer
 from django.utils.translation import gettext_lazy as _
 
 
@@ -37,13 +37,21 @@ class SubCategory(models.Model):
 
 
 class Work(models.Model):
+    # employer = models.ForeignKey(
+    #     verbose_name=_("Ish beruvchi"),
+    #     to=User,
+    #     on_delete=models.SET_NULL,
+    #     blank=True,
+    #     null=True
+    # )
     employer = models.ForeignKey(
         verbose_name=_("Ish beruvchi"),
-        to=User,
+        to=Employer,
         on_delete=models.SET_NULL,
         blank=True,
         null=True
     )
+
     title = models.CharField(
         max_length=200,
         verbose_name=_("Ish nomi"),
