@@ -3,7 +3,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework import generics, status
+from rest_framework import generics, status, filters
+from django_filters.rest_framework import DjangoFilterBackend
 
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -17,6 +18,8 @@ class RegionListAPIView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     queryset = models.Region.objects.all()
     serializer_class = serializers.RegionSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ('name',)
 
 
 # Region Detail API View
@@ -31,6 +34,9 @@ class DistrictListAPIView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     queryset = models.District.objects.all()
     serializer_class = serializers.DistrictSerializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filterset_fields = ('region',)
+    search_fields = ('name', 'region__name')
 
 
 # District Detail API View
@@ -209,6 +215,8 @@ class ChangePasswordAPIView(APIView):
 class EmployerListAPIView(generics.ListAPIView):
     queryset = models.Employer.objects.all()
     serializer_class = serializers.EmployerSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ('full_name',)
 
 
 # Employer Detail API View
