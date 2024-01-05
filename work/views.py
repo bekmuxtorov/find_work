@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, filters
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from django_filters.rest_framework import DjangoFilterBackend
 
 from . import models
 from . import serializers
@@ -18,6 +19,8 @@ class CategoryListAPIView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     queryset = models.Category.objects.all()
     serializer_class = serializers.CategorySerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ('name',)
 
 
 class CategoryDetailAPIView(generics.RetrieveAPIView):
@@ -49,6 +52,9 @@ class SubCategoryListAPIView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     queryset = models.SubCategory.objects.all()
     serializer_class = serializers.SubCategorySerializer
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
+    search_fields = ('name', 'category_name')
+    filterset_fields = ('category', 'category_name')
 
 
 class SubCategoryDetailAPIView(generics.RetrieveAPIView):
@@ -80,6 +86,12 @@ class WorkListAPIView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     queryset = models.Work.objects.all()
     serializer_class = serializers.WorkSerializer
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
+    search_fields = ('employer__full_name', 'title',
+                     'description', 'region__name', 'district__name')
+    filterset_fields = ('region', 'district', 'status',
+                        'subcategory', 'employer', 'region__name',
+                        'district__name', 'subcategory__name', 'employer__full_name')
 
 
 class WorkDetailAPIView(generics.RetrieveAPIView):
