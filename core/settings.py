@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'rest_framework',  # for API
     'rest_framework.authtoken',  # for Token
     'drf_yasg',  # for Swagger
+    'django_filters',  # for Filters
 ] + LOCAL_APPS
 
 MIDDLEWARE = [
@@ -174,5 +175,6 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticatedOrReadOnly",
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 15
+    'PAGE_SIZE': 15,
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
