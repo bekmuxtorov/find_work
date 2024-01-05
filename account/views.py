@@ -35,7 +35,7 @@ class DistrictListAPIView(generics.ListAPIView):
     queryset = models.District.objects.all()
     serializer_class = serializers.DistrictSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ('region',)
+    filterset_fields = ('region__name', 'region', )
     search_fields = ('name', 'region__name')
 
 
