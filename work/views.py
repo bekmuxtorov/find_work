@@ -53,8 +53,8 @@ class SubCategoryListAPIView(generics.ListAPIView):
     queryset = models.SubCategory.objects.all()
     serializer_class = serializers.SubCategorySerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend]
-    search_fields = ('name', 'category_name')
-    filterset_fields = ('category', 'category_name')
+    search_fields = ('name', 'category__name')
+    filterset_fields = ('category', 'category__name')
 
 
 class SubCategoryDetailAPIView(generics.RetrieveAPIView):
